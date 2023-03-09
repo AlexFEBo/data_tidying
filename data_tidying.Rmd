@@ -1,0 +1,91 @@
+---
+title: "data_tidying"
+author: "A Bokhobza"
+date: "2023-03-09"
+output: html_document
+---
+
+**Aim**: Tidy data from a excel file.\
+**Contact**: [alexandre.bokhobza\@gmail.com](mailto:alexandre.bokhobza@gmail.com){.email}.\
+**Reference used for creating this notebook**:[DataViz](https://joachimgoedhart.github.io/DataViz-protocols/read-and-reshape.html#tidy-data)
+
+------------------------------------------------------------------------------
+
+1. Load appropriate libraries.\
+
+```{r warning=FALSE}
+
+library(tidyverse)
+library(openxlsx)
+
+```
+
+1. Open and load the desired file as a dataframe (named df):\
+
+```{r }
+
+df <- read.xlsx("analysis_Test.xlsx", fillMergedCells = TRUE, colNames = FALSE )
+
+```
+Adapt the file name according to the file to process.\
+
+1. Create R objects (type = vector, named first_row ) from the column names of the excel file and replace the whitespace by a point\
+
+```{r }
+
+first_row <- df[1,] %>% unlist(use.names = FALSE)
+first_row <- str_replace_all(first_row, pattern = " ", replacement = ".")
+
+second_row <- df[2,] %>% unlist(use.names = FALSE)
+second_row <- str_replace_all(second_row, pattern = " ", replacement = ".")
+
+```  
+
+1. Combine the vector (first_row and second_row) into a single one (use underscore during combination).\
+
+```{r}
+
+combined_labels <- paste(first_row, second_row, sep = "_")
+
+```
+
+1. Deletes the first rows from the dataframe.\
+
+```{r }
+
+df_no_header <- df[-c(1:2),]
+
+```
+
+1. Add the new lables to the df.\
+
+```{r}
+
+colnames(df_no_header) <- combined_labels
+
+```
+
+1. Tidy the data.\
+
+```{r}
+
+df_tidy <- pivot_longer(df_no_header, cols = everything(), names_to = "combined_labels", values_to = "Intensity")
+
+```
+
+1. Split the combined labels.\
+
+```{r}
+
+df_tidy_final <- df_tidy %>% separate(combined_labels, c('Strand', 'Target'), sep = "_")
+
+```
+
+1. Save the tidy df as a csv file.\
+
+```{r}
+
+write.csv(df_tidy_final, "analysis_test_tidy.csv", row.names = FALSE)
+
+```
+

@@ -5,7 +5,7 @@ date: "2023-03-09"
 output: html_document
 ---
 
-**Aim**: Tidy data from a excel file.\
+**Aim**: Tidy data from an excel file.\
 **Contact**: [alexandre.bokhobza\@gmail.com](mailto:alexandre.bokhobza@gmail.com){.email}.\
 **Reference used for creating this notebook**:[DataViz](https://joachimgoedhart.github.io/DataViz-protocols/read-and-reshape.html#tidy-data)
 
@@ -17,14 +17,24 @@ output: html_document
 
 library(tidyverse)
 library(openxlsx)
+library(here)
+
+```
+
+1. Setup Here package for easy sharing between collaborators.\
+
+```{r}
+
+here::i_am("data_tidying.Rproj")
+here()
 
 ```
 
 1. Open and load the desired file as a dataframe (named df):\
 
-```{r }
+```{r}
 
-df <- read.xlsx("analysis_Test.xlsx", fillMergedCells = TRUE, colNames = FALSE )
+df <- read.xlsx("../data/analysis_Test.xlsx", fillMergedCells = TRUE, colNames = FALSE )
 
 ```
 Adapt the file name according to the file to process.\
@@ -85,7 +95,7 @@ df_tidy_final <- df_tidy %>% separate(combined_labels, c('Strand', 'Target'), se
 
 ```{r}
 
-write.csv(df_tidy_final, "analysis_test_tidy.csv", row.names = FALSE)
+write.csv(df_tidy_final, "../output/analysis_test_tidy.csv", row.names = FALSE)
 
 ```
 

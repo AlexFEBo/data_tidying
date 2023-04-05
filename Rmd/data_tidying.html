@@ -357,7 +357,7 @@ display: none;
 </div>
 
 
-<p><strong>Aim</strong>: Tidy data from a excel file.<br />
+<p><strong>Aim</strong>: Tidy data from an excel file.<br />
 <strong>Contact</strong>: <a href="mailto:alexandre.bokhobza@gmail.com" class="email">alexandre.bokhobza@gmail.com</a>.<br />
 <strong>Reference used for creating this notebook</strong>:<a href="https://joachimgoedhart.github.io/DataViz-protocols/read-and-reshape.html#tidy-data">DataViz</a></p>
 <hr />
@@ -366,20 +366,32 @@ display: none;
 </li>
 </ol>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-## ✔ ggplot2 3.4.0      ✔ purrr   1.0.1 
-## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-## ✔ tidyr   1.2.1      ✔ stringr 1.5.0 
-## ✔ readr   2.1.3      ✔ forcats 0.5.2 
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.0     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.1     ✔ tibble    3.2.0
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.1     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(openxlsx)</code></pre>
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(openxlsx)
+library(here)</code></pre>
+<pre><code>## here() starts at C:/Users/bokhobza/OneDrive - Universitaet Bern/Documents/R/data_tidying</code></pre>
+<ol style="list-style-type: decimal">
+<li>Setup Here package for easy sharing between collaborators.<br />
+</li>
+</ol>
+<pre class="r"><code>here::i_am(&quot;data_tidying.Rproj&quot;)</code></pre>
+<pre><code>## here() starts at C:/Users/bokhobza/OneDrive - Universitaet Bern/Documents/R/data_tidying</code></pre>
+<pre class="r"><code>here()</code></pre>
+<pre><code>## [1] &quot;C:/Users/bokhobza/OneDrive - Universitaet Bern/Documents/R/data_tidying&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li>Open and load the desired file as a dataframe (named df):<br />
 </li>
 </ol>
-<pre class="r"><code>df &lt;- read.xlsx(&quot;analysis_Test.xlsx&quot;, fillMergedCells = TRUE, colNames = FALSE )</code></pre>
+<pre class="r"><code>df &lt;- read.xlsx(&quot;../data/analysis_Test.xlsx&quot;, fillMergedCells = TRUE, colNames = FALSE )</code></pre>
 <p>Adapt the file name according to the file to process.<br />
 </p>
 <ol style="list-style-type: decimal">
@@ -422,7 +434,7 @@ underscore during combination).<br />
 <li>Save the tidy df as a csv file.<br />
 </li>
 </ol>
-<pre class="r"><code>write.csv(df_tidy_final, &quot;analysis_test_tidy.csv&quot;, row.names = FALSE)</code></pre>
+<pre class="r"><code>write.csv(df_tidy_final, &quot;../output/analysis_test_tidy.csv&quot;, row.names = FALSE)</code></pre>
 
 
 

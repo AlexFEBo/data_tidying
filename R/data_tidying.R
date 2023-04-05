@@ -1,7 +1,16 @@
 library(tidyverse)
 library(openxlsx)
+library(here)
 
- # install.packages("openxlsx")
+# If above packages are not installed, use the following code:
+  # install.packages("openxlsx")
+
+# Here package make sharing Rprojects easier by setting-up paths relative to the top-level directory of the current project.  
+
+here::i_am("data_tidying.Rproj")
+here()
+
+
 
 # Open the desired file and load it into a data frame: "df") 
 

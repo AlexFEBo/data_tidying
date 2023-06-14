@@ -11,7 +11,6 @@ here::i_am("data_tidying.Rproj")
 here()
 
 
-
 # Open the desired file and load it into a data frame: "df") 
 
 df <- read.xlsx("analysis_Test.xlsx", fillMergedCells = TRUE, colNames = FALSE )

@@ -67,7 +67,7 @@ df_no_header <- df[-c(1:2),]
 
 ```
 
-1. Add the new lables to the df.\
+1. Add the new labels to the df.\
 
 ```{r}
 
